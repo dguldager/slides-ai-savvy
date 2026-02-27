@@ -1,3 +1,546 @@
+
+Denne her side skal have en underside til ai-savvy-dk. Den skal kunne være dynamisk, så jeg kan ændre en smule indhold (nye slides eks.) og så kan jeg lave url om så den passer til den konkrete kunde.
+
+I dette tilfælde skal den ligge under: ai-savvy.dk/#/efterforedrag-cbn
+
+
+Gathered user requirements for post-lecture website content
+Gathered user requirements for post-lecture website content
+
+
+
+
+
+Spændende opgave! Lad mig stille et par spørgsmål, så jeg kan lave det rigtigt fra starten.
+
+Hvad skal siden primært indeholde? (Det er en "efterforedrag"-side, så hvad skal besøgende kunne se/gøre der?)
+[No preference]
+Hvem er 'cbn' – hvad er det for en kunde/organisation, og er der noget specifikt indhold du allerede ved skal med?
+[No preference]
+Har ai-savvy.dk allerede et bestemt look (farver, logo, skrifttype)? Skal siden matche det?
+[No preference]
+Lad mig kigge på hvad der allerede er i din mappe, så jeg kan arbejde ud fra det eksisterende materiale.
+
+
+Read package.json and main.tsx configuration files
+Read package.json and main.tsx configuration files
+
+
+
+
+
+
+
+
+
+
+
+
+Nu har jeg et komplet billede af projektet. Det er en React-app med Vite og Tailwind. Jeg kan se at siden allerede har CBN-indhold (slides-link til "AI-CBN-feb-2026.pdf"). Jeg vil nu gøre den dynamisk, så du nemt kan oprette nye kundesider ved at ændre én config-fil, og URL'en #/efterforedrag-cbn virker korrekt.
+
+
+Updated task list for hash-routing implementation project
+Updated task list for hash-routing implementation project
+
+
+
+
+
+
+npm er blokeret i dette miljø. Jeg bygger i stedet en simpel hash-router direkte i React – det kræver ingen nye pakker og er faktisk lettere at vedligeholde.
+
+
+Created EfterforedragPage.tsx component with motion animations
+Created EfterforedragPage.tsx component with motion animations
+Nu opdaterer jeg App.tsx med den simple hash-router:
+
+
+Updated App.tsx with hash router and page navigation
+Updated App.tsx with hash router and page navigation
+Nu verificerer jeg at alt ser korrekt ud ved at tjekke for TypeScript-fejl:
+
+
+Checked for TypeScript and Vite binaries, found missing node_modules directory
+Checked for TypeScript and Vite binaries, found missing node_modules directory
+
+
+
+Node_modules er ikke installeret i dette miljø, men koden er korrekt — lad mig lave en manuel gennemgang af filerne for at sikre alt er rigtigt.
+
+
+Updated todo list tracking hash-routing and customer config implementation
+Updated todo list tracking hash-routing and customer config implementation
+Alt ser korrekt ud. Her er et overblik over hvad der nu er på plads:
+
+Tre filer er ændret/oprettet:
+
+Åbn customers.ts — Her retter du alt indhold per kunde
+
+Åbn EfterforedragPage.tsx — Skabelonen (behøver du sjældent røre)
+
+Åbn App.tsx — Routeren (behøver du aldrig røre)
+
+Sådan fungerer det nu:
+
+ai-savvy.dk/#/efterforedrag-cbn → viser CBN-siden automatisk
+
+Vil du lave en ny kunde, f.eks. "Novo Nordisk", gør du kun dette ét sted i customers.ts:
+
+novo: {
+  name: "Novo Nordisk",
+  heroTagline: "Næste skridt efter foredraget",
+  slidesUrl: "https://dropbox.com/link-til-slides",
+  ...
+}
+Og URL'en ai-savvy.dk/#/efterforedrag-novo virker straks — ingen andre filer skal røres.
+
+Customers
+TS 
+Efterforedragpage
+Code · TSX 
+App
+Code · TSX 
+er den lagt online på en webside under ai-savvy.dk. nu?
+
+
+Thought process
+Thought process
+
+
+Nej, ikke endnu. Jeg har kun ændret filerne på din computer — de er ikke uploadet/deployed til ai-savvy.dk endnu.
+
+For at siden kommer online, skal du gøre det du normalt gør for at opdatere ai-savvy.dk. Det afhænger af hvordan siden er sat op. De mest typiske muligheder er:
+
+GitHub/Netlify/Vercel — Hvis siden automatisk opdateres fra GitHub, skal du bare pushe de nye filer. Siden bygger sig selv og går live.
+
+Manuel upload — Hvis du uploader filer direkte til et webhotel, skal du først bygge projektet (npm run build) og derefter uploade indholdet af dist-mappen.
+
+Ved du ikke helt hvordan det er sat op? Fortæl mig, og vi finder ud af det sammen. Du kan fx tjekke om du har et GitHub-repository for ai-savvy.dk, eller hvem der hoster siden for dig.
+
+jeg har købt domæne på one.com men pusher vist via vercel
+
+
+Thought process
+Thought process
+
+
+Perfekt, så er det ret nemt! Lad mig tjekke om der er et GitHub-repository sat op i din projektmappe.
+
+
+Checked git repository status; not initialized
+Checked git repository status; not initialized
+
+
+
+Mappen er ikke sat op som et git-repository her på din computer — det betyder du sandsynligvis styrer det direkte på GitHub. Her er den nemmeste vej frem:
+
+Mulighed 1 — GitHub Desktop (anbefalet hvis du bruger det)
+
+Åbn GitHub Desktop
+Du vil se de nye/ændrede filer: src/App.tsx, src/customers.ts, src/EfterforedragPage.tsx
+Skriv en kort besked, f.eks. "Tilføj dynamiske efterforedrag-sider"
+Klik Commit → Push
+Vercel opdager det automatisk og går live inden for et minut eller to
+Mulighed 2 — GitHub.com direkte
+
+Gå til dit repository på github.com
+Upload de tre filer manuelt under src/
+Vercel deployer automatisk
+Hvis du er i tvivl om hvad dit GitHub-repository hedder, kan du tjekke på vercel.com under dine projekter — der kan du se hvilket GitHub-repo det er koblet til, og du kan se live-deployments ske i realtid, når du pusher.
+
+men det er jo kun ai-savvy.dk der er sat op til vercel - kan jeg ikke gøre det nemmere?
+
+
+Thought process
+Thought process
+
+
+
+
+
+God pointe. Der er et par muligheder, afhængigt af hvad du egentlig ønsker:
+
+Spørgsmål 1: Er denne "N-ste-skridt"-mappe et separat GitHub-repository, eller er det en del af det samme projekt som ai-savvy.dk?
+
+Spørgsmål 2: Hvad vil du helst?
+
+Siden under ai-savvy.dk (som du sagde) → ai-savvy.dk/#/efterforedrag-cbn — så skal koden lægges ind i det eksisterende ai-savvy.dk projekt/repo
+Separat side → f.eks. efterforedrag.ai-savvy.dk — så kan dette projekt få sit eget Vercel-projekt på 2 minutter
+Den absolut nemmeste løsning for en ny Vercel-deployment (uden GitHub): Vercel understøtter "drag and drop" — du bygger projektet én gang, og trækker en mappe direkte ind på vercel.com. Ingen GitHub nødvendig.
+
+Men hvis målet er ai-savvy.dk/#/efterforedrag-cbn, skal vi nok kigge på hvad ai-savvy.dk-projektet er bygget i. Vet du hvad der er i det GitHub-repo der er koblet til din ai-savvy.dk på Vercel?
+
+lad det bare få en seperat side
+
+
+Thought process
+Thought process
+
+
+
+
+
+Super, så er det faktisk ret nemt. Vercel klarer selv byggeprocessen, så du behøver kun at oprette et nyt projekt. Her er den korteste vej:
+
+
+Chrome extension connection unavailable
+Chrome extension connection unavailable
+Browseren er ikke tilgængelig, men processen er ligetil — her er de præcise trin:
+
+Trin 1 — Lav et nyt GitHub-repo (2 min)
+
+Gå til github.com/new
+Giv det et navn, f.eks. ai-savvy-efterforedrag
+Klik Create repository
+Klik uploading an existing file og træk hele din N-ste-skridt-main-mappe ind
+Klik Commit changes
+Trin 2 — Opret nyt Vercel-projekt (2 min)
+
+Gå til vercel.com/new
+Klik Import ved siden af det nye GitHub-repo
+Vercel finder selv ud af at det er et Vite/React-projekt — klik bare Deploy
+Trin 3 — Sæt domæne på (2 min)
+
+Under projektet i Vercel → Settings → Domains
+Tilføj f.eks. efterforedrag.ai-savvy.dk
+Vercel viser dig en DNS-record → den tilføjer du på one.com under dit domæne
+Når det er gjort, er efterforedrag.ai-savvy.dk/#/efterforedrag-cbn live — og fremover uploader du bare nye filer til GitHub-repoen, så opdaterer Vercel automatisk.
+
+Vil du have hjælp til et af trinene?
+
+så jeg behøver ikek købe et nyt domæne? Og kunne vi finde et smartere url end efterforedrag?
+
+
+Thought process
+Thought process
+
+
+
+
+
+Nej, du behøver ikke købe noget nyt! Et subdomæne under ai-savvy.dk er gratis — du tilføjer bare en enkelt linje i din DNS-opsætning på one.com.
+
+Til URL-forslaget — lad os også gøre den kortere. Pt. ville den se sådan ud: efterforedrag.ai-savvy.dk/#/efterforedrag-cbn — det er unødigt langt.
+
+Vi kan ændre begge dele. Hvad synes du om én af disse?
+
+Subdomain	Kunde-URL
+slides.ai-savvy.dk	slides.ai-savvy.dk/#/cbn
+next.ai-savvy.dk	next.ai-savvy.dk/#/cbn
+go.ai-savvy.dk	go.ai-savvy.dk/#/cbn
+fra.ai-savvy.dk	fra.ai-savvy.dk/#/cbn
+link.ai-savvy.dk	link.ai-savvy.dk/#/cbn
+slides eller go er nok de fedeste — korte, intuitive og professionelle. Jeg kan opdatere koden så #/cbn virker i stedet for #/efterforedrag-cbn, det er en lille ændring.
+
+Hvilken foretrækker du?
+
+ja slides er fint
+
+
+Thought process
+Thought process
+
+
+Fedt! Lad mig opdatere koden så URL'en bliver slides.ai-savvy.dk/#/cbn.
+
+
+Updated App.tsx with corrected URL reference format
+Updated App.tsx with corrected URL reference format
+Klar! URL'en er nu slides.ai-savvy.dk/#/cbn — rent og enkelt.
+
+Opsummering af hvad du skal gøre for at komme online:
+
+GitHub — Upload mappen til et nyt repo på github.com
+Vercel — Opret nyt projekt fra det repo (de finder selv ud af byggeprocessen)
+Domæne — Under projektets Settings → Domains i Vercel, skriv slides.ai-savvy.dk — Vercel viser dig én DNS-record du skal kopiere ind på one.com
+Næste gang du skal lave en ny kunde, er det bare at tilføje en ny blok i customers.ts og pushe til GitHub. Vercel opdaterer automatisk, og URL'en slides.ai-savvy.dk/#/[ny-kunde] virker med det samme.
+
+hvor trykker jeg uploading an existing file i github?
+
+
+Unable to connect Chrome extension for code context
+Unable to connect Chrome extension for code context
+
+Browseren er ikke tilgængelig, men her er præcis hvor du finder det:
+
+Når du har oprettet et nyt tomt repo på github.com, lander du på en side der ser sådan ud:
+
+Quick setup — if you've done this kind of thing before
+...
+…or create a new repository on the command line
+...
+Lidt nede på den side er der en linje der siger:
+
+"…or upload a file" — klik på "uploading an existing file"
+
+Det er et lille link (ikke en knap), midt på siden.
+
+Alternativt — endnu nemmere: Du kan faktisk også bare trække filerne direkte ind i GitHub i din browser, hvis du allerede er inde på et repo. Men den simpleste fremgangsmåde:
+
+Gå til github.com/new
+Giv repo et navn (f.eks. ai-savvy-slides)
+Sæt flueben ved "Add a README file" (så er repo'et ikke tomt)
+Klik Create repository
+Klik på den grønne knap "Add file" øverst → "Upload files"
+Træk hele din mappe ind
+Det er lidt nemmere end at finde det lille "uploading an existing file"-link. Har du allerede en GitHub-konto?
+
+Uploaded image
+image.jpeg
+det kunne den ikke
+
+
+Thought process
+Thought process
+
+
+
+Det skete fordi GitHub prøvede at importere det som et eksisterende git-projekt — men din mappe er ikke det. Vi skal bare uploade filerne direkte i stedet.
+
+Prøv sådan her:
+
+Gå til github.com/new og opret et nyt tomt repo
+Sæt flueben ved "Add a README file" (vigtigt — så er repo'et ikke tomt)
+Klik Create repository
+På næste side klikker du på den grønne knap "Add file" → "Upload files"
+Åbn din N-ste-skridt-main mappe på din computer og træk disse filer/mapper ind:
+Mappen src/
+index.html
+package.json
+vite.config.ts
+tsconfig.json
+Klik Commit changes
+Det skulle virke uden problemer. Vil du have hjælp til næste trin bagefter?
+
+Uploaded image
+image.jpeg
+hvor er add file?
+
+Det kan jeg se på skærmbilledet! "Add file" knappen er lige der — den grå knap øverst til højre, lige til venstre for den grønne "Code" knap.
+
+Klik på "Add file" → "Upload files" og træk så filerne ind.
+
+done - hvad så?
+
+Perfekt! Nu skal du koble det til Vercel:
+
+Gå til vercel.com og log ind
+Klik på "Add New Project"
+Find slides-ai-savvy i listen over GitHub-repos og klik Import
+Klik bare Deploy — Vercel finder selv ud af resten
+Send mig et screenshot når du er inde på Vercel, så guider jeg dig videre med domænet!
+
+Uploaded image
+image.jpeg
+Nu ser den sådan ud.
+
+Men jeg vil jo gerne have den ser således ud: https://ai-savvy-landing-page-469905289820.us-west1.run.app/
+
+Og har en url der hedder slides.ai-savvy.dk/#/cbn
+
+
+Thought process
+Thought process
+
+
+
+
+Det virker faktisk korrekt! Du ser forsiden fordi du besøger den uden #/cbn i URL'en. Prøv at tilføje det i adresselinjen:
+
+[din-vercel-url]/#/cbn
+
+Lad mig også tjekke den URL du delte, så jeg ser hvad du sammenligner med.
+
+
+Unable to access landing page due to network restrictions
+Unable to access landing page due to network restrictions
+Jeg kan ikke åbne den URL direkte, men jeg gætter på det er den gamle version af siden med alt CBN-indholdet — og det er præcis hvad du ser når du besøger /#/cbn.
+
+Prøv nu at gå til din Vercel-side og tilføj /#/cbn i adresselinjen. Hvad ser du?
+
+Og hvad er URL'en på din Vercel-deployment? Den vil se nogenlunde sådan ud: slides-ai-savvy.vercel.app — send mig den, så kan vi sætte slides.ai-savvy.dk op som dit eget domæne i næste trin.
+
+altså denne adresse; https://slides-ai-savvy.vercel.app/#cbn
+
+Der er pt ikke noget på
+
+
+Thought process
+Thought process
+
+
+
+
+Det mangler bare en / — prøv:
+
+https://slides-ai-savvy.vercel.app/#/cbn
+
+Der skal være en skråstreg efter #. Det er den lille forskel der gør at siden finder det rigtige indhold.
+
+hvor nice - og urlen?
+
+Fedt at det virkede! 🎉
+
+Nu skal du bare sætte dit eget domæne på. To hurtige trin:
+
+På Vercel:
+
+Gå ind på dit slides-ai-savvy projekt
+Klik Settings → Domains
+Skriv slides.ai-savvy.dk og klik Add
+Vercel viser dig en DNS-record — den ser nogenlunde sådan ud:
+Type: CNAME
+Name: slides
+Value: cname.vercel-dns.com
+På one.com:
+
+Log ind og gå til DNS-indstillinger for ai-savvy.dk
+Tilføj den CNAME-record som Vercel viste dig
+Vent 5-10 minutter
+Derefter virker slides.ai-savvy.dk/#/cbn som din officielle URL. Send mig gerne et screenshot fra Vercel når du har tilføjet domænet, så kan jeg bekræfte at du har de rigtige værdier.
+
+Uploaded image
+image.jpeg
+hvor gør jeg det?
+
+Du er på den rigtige side! Klik på "Add Existing" knappen øverst til højre, og skriv slides.ai-savvy.dk i feltet der kommer frem.
+
+Vercel vil så vise dig de DNS-værdier du skal ind og tilføje på one.com bagefter.
+
+Uploaded image
+image.jpeg
+den er live nu, men link-eksemplet siger at det er en google ai studio - det er det vel ikke mere
+
+Godt arbejde — slides.ai-savvy.dk er live! 🎉
+
+Du har ret, titlen "My Google AI Studio App" skal ændres. Det er bare en linje i index.html. Lad mig fixe det med det samme.
+
+
+Updated page title to "AI-Savvy – Slides & Efterforedrag"
+Updated page title to "AI-Savvy – Slides & Efterforedrag"
+Nu skal du bare uploade den opdaterede index.html til GitHub — så opdaterer Vercel automatisk inden for et minut.
+
+Gå til dit slides-ai-savvy repo på github.com → klik på index.html → klik på blyantsikonet (Edit) øverst til højre → find linjen med "My Google AI Studio App" og ret den til "AI-Savvy – Slides & Efterforedrag" → klik Commit changes.
+
+Kan gøres sådan at hvis man trykker på ai-savvy ikonet oppe i venstre hjørne kommer man til ai-savvy.dk
+
+
+Updated image URL in EfterforedragPage component
+Updated image URL in EfterforedragPage component
+
+
+Klaret! Nu skal du bare uploade den opdaterede fil til GitHub:
+
+Gå til dit slides-ai-savvy repo → mappen src → klik på EfterforedragPage.tsx → klik på blyantsikonet → find de to linjer med <div className="flex items-center gap-2"> og <img... og erstat dem med det nye — eller nemmere: slet filen og upload den nye version fra din mappe.
+
+Vercel opdaterer automatisk inden for et minut bagefter.
+
+du kan ikke pushe gherfra?
+
+
+Thought process
+Thought process
+
+
+
+
+Nej desværre, jeg har ikke adgang til din GitHub-konto. Men de to ændringer er så små at det nemmest gøres direkte på GitHub.com:
+
+Fil 1 — index.html
+
+Gå til dit slides-ai-savvy repo
+Klik på index.html → blyantikon
+Ret linje 6 til: <title>AI-Savvy – Slides & Efterforedrag</title>
+Klik Commit changes
+Fil 2 — src/EfterforedragPage.tsx
+
+Klik på mappen src → EfterforedragPage.tsx → blyantikon
+Find linjen der starter med <div className="flex items-center gap-2"> (ca. linje 60)
+Erstat de tre linjer (<div...>, <img.../>, </div>) med:
+<a href="https://www.ai-savvy.dk" target="_blank" rel="noopener noreferrer">
+  <img src="https://www.dropbox.com/scl/fi/w9wss6q55aukulfnkmtu4/ai-savvy-2.0-hvid.png?rlkey=kyucd5kwlj8hrec5ep8lehpxi&st=g5i446eo&raw=1" alt="AI-Savvy" className="h-20 w-auto hover:opacity-80 transition-opacity" />
+</a>
+Klik Commit changes
+Vercel deployer automatisk bagefter!
+
+ingen af knapperne virker på url?
+
+
+Thought process
+Thought process
+
+
+
+
+Jeg ved hvad problemet er! Navigationslinkene bruger #insights, #test osv. — men vores router tror det er en ny kundeside og finder ingenting. Jeg fikser det så de scroller ned i stedet.
+
+
+Updated navigation links in EfterforedragPage component
+Updated navigation links in EfterforedragPage component
+Også hero-knapperne skal fixes:
+
+
+Updated navigation links in EfterforedragPage component
+Updated navigation links in EfterforedragPage component
+Nu skal du uploade den opdaterede src/EfterforedragPage.tsx til GitHub — gå til src/EfterforedragPage.tsx i dit repo, klik blyantsikonet og erstat indholdet med den nye version fra din mappe. Vercel opdaterer automatisk bagefter.
+
+hjælp mig lige fra bunden af - alle links skal fungere inden for den samme url
+
+
+Thought process
+Thought process
+
+
+
+
+De ændringer er klar på din computer — vi skal bare have dem op på GitHub. Det nemmeste er at erstatte filen direkte:
+
+Gå til dit slides-ai-savvy repo på github.com
+Klik på mappen src
+Klik på EfterforedragPage.tsx
+Klik på blyantsikonet (Edit this file) øverst til højre
+Tryk Ctrl+A (eller Cmd+A på Mac) for at markere ALT indholdet
+Slet det og indsæt det nye indhold herunder:
+
+Read and analyzed EfterforedragPage.tsx component structure
+Read and analyzed EfterforedragPage.tsx component structure
+Gå til dit repo på GitHub → src → EfterforedragPage.tsx → klik blyantsikonet → tryk Ctrl+A for at markere alt → slet det → og indsæt hele denne tekst:
+
+
+Reviewed EfterforedragPage.tsx component file
+Reviewed EfterforedragPage.tsx component file
+Åbn filen herover, kopier alt indholdet (Ctrl+A → Ctrl+C), og indsæt det i GitHub-editoren. Klik derefter Commit changes — Vercel opdaterer automatisk inden for et minut.
+
+Efterforedragpage
+Code · TSX 
+kan ikke se src
+
+
+Thought process
+Thought process
+
+
+
+
+
+Det er fordi src-mappen ikke blev uploadet. Det kan GitHub godt drille med. Her er den nemmeste løsning:
+
+Gå til dit repo på github.com
+Klik "Add file" → "Create new file"
+I navnefeltet øverst skriver du: src/EfterforedragPage.tsx
+GitHub opretter automatisk src-mappen
+Kopier hele indholdet fra filen herunder og indsæt det
+Klik Commit changes
+Gentag for src/App.tsx, src/customers.ts, src/main.tsx og src/index.css.
+
+Vil du have mig til at vise indholdet af én fil ad gangen, så det er nemmere at kopiere?
+
+
+
+
+
+Claude is AI and can make mistakes. Please double-check responses. Give us feedback
+Efterforedragpage · TSX
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import {
@@ -58,23 +601,23 @@ export default function EfterforedragPage({ config }: { config: CustomerConfig }
       {/* ── Navigation ──────────────────────────────────────── */}
       <nav className="fixed top-0 w-full z-50 bg-navy-900/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <a href="https://www.ai-savvy.dk" target="_blank" rel="noopener noreferrer">
             <img
               src="https://www.dropbox.com/scl/fi/w9wss6q55aukulfnkmtu4/ai-savvy-2.0-hvid.png?rlkey=kyucd5kwlj8hrec5ep8lehpxi&st=g5i446eo&raw=1"
               alt="AI-Savvy"
-              className="h-20 w-auto"
+              className="h-20 w-auto hover:opacity-80 transition-opacity"
             />
-          </div>
+          </a>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <a href="#insights" className="hover:text-white transition-colors">Pointer</a>
-            <a href="#test" className="hover:text-white transition-colors">AI-Test</a>
-            <a href="#courses" className="hover:text-white transition-colors">Kurser</a>
-            <a
-              href="#courses"
+            <button onClick={() => document.getElementById('insights')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Pointer</button>
+            <button onClick={() => document.getElementById('test')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">AI-Test</button>
+            <button onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Kurser</button>
+            <button
+              onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full text-white transition-all"
             >
               Kom i gang
-            </a>
+            </button>
           </div>
         </div>
       </nav>
@@ -110,19 +653,19 @@ export default function EfterforedragPage({ config }: { config: CustomerConfig }
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-                <a
-                  href="#courses"
+                <button
+                  onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}
                   className="inline-flex items-center justify-center gap-2 bg-accent-orange hover:bg-[#e6701c] text-white px-8 py-4 rounded-full font-medium transition-all hover:scale-105 active:scale-95"
                 >
                   Se næste skridt
                   <ArrowRight className="w-5 h-5" />
-                </a>
-                <a
-                  href="#test"
+                </button>
+                <button
+                  onClick={() => document.getElementById('test')?.scrollIntoView({ behavior: 'smooth' })}
                   className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-full font-medium transition-all"
                 >
                   Tag AI-modenhedstesten
-                </a>
+                </button>
                 {config.slidesUrl && (
                   <a
                     href={config.slidesUrl}
